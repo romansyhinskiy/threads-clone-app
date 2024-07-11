@@ -1,11 +1,16 @@
 import AccountProfile from "@/components/forms/AccountProfile";
 import React from "react";
 import { currentUser } from "@clerk/nextjs/server";
+import { fetchUser } from "@/lib/actions/user.actions";
 
 const Onboarding = async () => {
   const user = await currentUser();
 
-  const userInfo = {};
+  if (!user) return null;
+  const userInfo = await fetchUser(user?.id);
+  // console.log("userInfoDetails", userInfoDetails);
+
+  // const userInfo = {};
 
   const userData = {
     id: user?.id,
