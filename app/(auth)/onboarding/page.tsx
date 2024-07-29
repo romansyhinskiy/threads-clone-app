@@ -8,17 +8,14 @@ const Onboarding = async () => {
 
   if (!user) return null;
   const userInfo = await fetchUser(user?.id);
-  // console.log("userInfoDetails", userInfoDetails);
-
-  // const userInfo = {};
 
   const userData = {
-    id: user?.id,
+    id: user.id,
     objectId: userInfo?._id,
-    username: userInfo?.username || user?.username,
-    name: userInfo?.name || user?.firstName || "",
-    bio: userInfo?.bio || "",
-    image: userInfo?.image || user?.imageUrl,
+    username: userInfo ? userInfo?.username : user.username,
+    name: userInfo ? userInfo?.name : user.firstName ?? "",
+    bio: userInfo ? userInfo?.bio : "",
+    image: userInfo ? userInfo?.image : user.imageUrl,
   };
 
   return (
